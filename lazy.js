@@ -98,9 +98,12 @@ function Lazy(em, opts) {
 
         // Sum all the buffers lengths
         finalBufferLength = buffers.reduce(function(left, right) {
-            return (left.length||left) + (right.length||right);
+            return parseInt((left.length||left) + (right.length||right), 10);
         }, 0);
         finalBuffer = new Buffer(finalBufferLength);
+        if (finalBufferLength === 0) {
+            finalBufferLength = 1;
+        }
         while(buffers.length) {
             currentBuffer = buffers.shift();
             currentBuffer.copy(finalBuffer, currentSize);
