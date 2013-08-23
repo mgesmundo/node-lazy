@@ -65,7 +65,7 @@ function Lazy(em, opts) {
         }
     }
 
-    function newLazy (g, h, l) {
+    function newLazy (g, h) {
         if (!g) {
             g = function () {
                 return true;
@@ -76,7 +76,7 @@ function Lazy(em, opts) {
                 return x;
             };
         }
-        var lazy = new Lazy(null, opts, l);
+        var lazy = new Lazy(null, opts);
         self.on(dataName, function (x, y) {
             if (g.call(lazy, x)) {
                 lazy.emit(dataName, h(x), y);
